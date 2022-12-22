@@ -31,7 +31,7 @@ private recipes : Recipe[] = [
 ];
 
 getRecipes(){
-  return this.recipes.slice();
+  return this.recipes;
 }
 
 getRecipeById(index: number) {
@@ -40,6 +40,18 @@ getRecipeById(index: number) {
 
 addIngredientsToShoppingList(recipe: Recipe){
   this.slService.AddIngridients(recipe.ingredients);
+}
+
+addRecipe(recipe: Recipe){
+  this.recipes.push(recipe);
+}
+
+updateRecipe(index: number, recipe: Recipe){
+  this.recipes[index] = recipe;
+}
+
+deleteRecipe(index: number){
+  this.recipes.splice(index, 1);
 }
 
 }
