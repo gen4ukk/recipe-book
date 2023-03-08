@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/Ingredient';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './Recipe.model';
@@ -29,6 +29,11 @@ private recipes : Recipe[] = [
       new Ingredient('Banana', 1),
     ])
 ];
+
+setRecipes(recipes: Recipe[]){
+  this.recipes = recipes;
+  console.log(this.recipes);
+}
 
 getRecipes(){
   return this.recipes;

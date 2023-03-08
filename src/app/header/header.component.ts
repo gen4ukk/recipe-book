@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DataStorageService } from '../shared/DataStorage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataStorageService: DataStorageService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+  }
+
+  onSaveData(){
+    this.dataStorageService.storeRecipe();
+  }
+
+  onFetchData(){
+    this.dataStorageService.fetchRecipe();
+    this.cdr.detectChanges();
   }
 
 }
