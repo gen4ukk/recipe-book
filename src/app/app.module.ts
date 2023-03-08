@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ChangeDetectorRef } from '@angular/core'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +38,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, { provide: ChangeDetectorRef, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
