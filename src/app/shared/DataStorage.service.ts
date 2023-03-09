@@ -23,21 +23,11 @@ storeRecipe(){
 
 fetchRecipe(){
   return this.httpClient
-    .get<Recipe[]>('https://myfirstprojwithapi-default-rtdb.firebaseio.com/recipes.json')
-    .pipe(
-      map(recipes => {
-        return recipes.map(recipe => {
-          return {
-            ...recipe, 
-            ingredients: recipe.ingredients ? recipe.ingredients : []
-          };
-        });
-      }),
-      tap(recipes => {
-        this.recipeService.setRecipes(recipes);
-      })
-    )
-    .subscribe();
+    .get<Recipe[]>('https://myfirstprojwithapi-default-rtdb.firebaseio.com/recipes.json').subscribe(recipes => {
+      this.recipeService.setRecipes(recipes);
+    })
+
+    
 }
 
 

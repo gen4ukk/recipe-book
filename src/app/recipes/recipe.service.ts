@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/Ingredient';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './Recipe.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Recipe } from './Recipe.model';
 export class RecipeService {
 
 constructor(private slService: ShoppingListService) { }
+recipeChanged = new Subject<Recipe[]>();
 
 private recipes : Recipe[] = [
   new Recipe(
@@ -32,6 +34,7 @@ private recipes : Recipe[] = [
 
 setRecipes(recipes: Recipe[]){
   this.recipes = recipes;
+  this.recipeChanged.next(this.recipes.slice());
   console.log(this.recipes);
 }
 
