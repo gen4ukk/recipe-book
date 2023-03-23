@@ -13,29 +13,30 @@ export class RecipeService {
 constructor(private slService: ShoppingListService) { }
 recipeChanged = new Subject<Recipe[]>();
 
-private recipes : Recipe[] = [
-  new Recipe(
-    'test recipe 1 fdfdfsfsdf',
-    'test description dsfsdfsdfsdfsdfsdfsdf',
-    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
-    [
-     new Ingredient('Meat', 100),
-     new Ingredient('Butter', 10),
-    ]),
-  new Recipe(
-    'test recipe 2 fdsfsdfdsfsd',
-    'test description sdfsdfsdfsdfsdfdsff',
-    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
-    [
-      new Ingredient('Oil', 13),
-      new Ingredient('Banana', 1),
-    ])
-];
+//private recipes : Recipe[] = [
+//  new Recipe(
+//    'test recipe 1 fdfdfsfsdf',
+//    'test description dsfsdfsdfsdfsdfsdfsdf',
+//    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
+//    [
+//     new Ingredient('Meat', 100),
+//     new Ingredient('Butter', 10),
+//    ]),
+//  new Recipe(
+//    'test recipe 2 fdsfsdfdsfsd',
+//    'test description sdfsdfsdfsdfsdfdsff',
+//    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
+//    [
+//      new Ingredient('Oil', 13),
+//      new Ingredient('Banana', 1),
+//    ])
+//];
 
-setRecipes(recipes: Recipe[]){
-  this.recipes = recipes;
-  this.recipeChanged.next(this.recipes.slice());
-  console.log(this.recipes);
+private recipes : Recipe[] = [];
+
+setRecipes(recipe: Recipe[]){
+  this.recipes = recipe;
+  this.recipeChanged.next(recipe);
 }
 
 getRecipes(){

@@ -1,7 +1,7 @@
 import { NgModule, ChangeDetectorRef } from '@angular/core'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,9 +16,12 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
       HeaderComponent,
       RecipesComponent,
@@ -29,7 +32,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
       ShoppingEditComponent,
       DropdownDirective,
       RecipeStartComponent,
-      RecipeEditComponent
+      RecipeEditComponent,
+      AuthComponent,
+      LoadingSpinnerComponent
    ],
   imports: [
     BrowserModule,
@@ -38,7 +43,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingListService, { provide: ChangeDetectorRef, useValue: {} }],
+  providers: [ShoppingListService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
