@@ -7,8 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './recipe-book.routing';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { StoreModule } from '@ngrx/store';
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { ActionReducer, StoreModule } from '@ngrx/store';
+import { shoppingListReducer, State } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [				
@@ -19,7 +19,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ shoppingListKey : shoppingListReducer }),
+    StoreModule.forRoot({ shoppingListKey : shoppingListReducer as ActionReducer<State> }),
     SharedModule,
     CoreModule
   ],

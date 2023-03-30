@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { Ingredient } from '../shared/Ingredient';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Injectable } from '@angular/core';
 import { Recipe } from './Recipe.model';
 import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
+import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +11,9 @@ import { Subject } from 'rxjs';
 
 export class RecipeService {
 
-constructor(private slService: ShoppingListService) { }
-recipeChanged = new Subject<Recipe[]>();
+constructor(private store: Store<fromShoppingList.AppState>) { }
 
-//private recipes : Recipe[] = [
-//  new Recipe(
-//    'test recipe 1 fdfdfsfsdf',
-//    'test description dsfsdfsdfsdfsdfsdfsdf',
-//    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
-//    [
-//     new Ingredient('Meat', 100),
-//     new Ingredient('Butter', 10),
-//    ]),
-//  new Recipe(
-//    'test recipe 2 fdsfsdfdsfsd',
-//    'test description sdfsdfsdfsdfsdfdsff',
-//    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=300,300',
-//    [
-//      new Ingredient('Oil', 13),
-//      new Ingredient('Banana', 1),
-//    ])
-//];
+recipeChanged = new Subject<Recipe[]>();
 
 private recipes : Recipe[] = [];
 
@@ -48,7 +31,7 @@ getRecipeById(index: number) {
 }
 
 addIngredientsToShoppingList(recipe: Recipe){
-  this.slService.AddIngridients(recipe.ingredients);
+  this.store.dispatch(new ShoppingListActions.AddIngredients(recipe.ingredients));
 }
 
 addRecipe(recipe: Recipe){
